@@ -46,12 +46,14 @@
             print_r($CON);
             */
         ?>
-        <!-- ej2 -->
+        <!-- ej2
         <form name="formulario" method="post" >
                 Piedra, papel tijera: <input type="text" name="PPT" >
                 <input type="submit" />
+                 -->
         <?php
-            $ppt=$_REQUEST['PPT'];
+           
+           /*$ppt=$_REQUEST['PPT'];
             $U=strtoupper($ppt);
             $op=array( 1 => "PIEDRA", 2=> "TIJERA", 3 => "PAPEL");
             $randomizador=rand(1,3);
@@ -70,7 +72,7 @@
             }else{
                 echo " <br>no has introducido un valor";
             }
-
+        */
         ?>
     </body>
 </html>
