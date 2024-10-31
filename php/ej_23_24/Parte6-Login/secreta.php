@@ -7,7 +7,9 @@
 <html lang="es">
 <body>
     <h2>Sesión de secretaria</h2>
-    <a href="deslogarse.php" class="buton-link">Loguin</a>
+    <form action="deslogarse.pgp">
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>
 <?php
