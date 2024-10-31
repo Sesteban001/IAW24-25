@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['User'] = $usuario; // Guardar el usuario en la sesión
         $_SESSION['con'] = $contraseña; // Guardar la contraseña en la sesión (no recomendado)
         header("Location: index.php"); // Redirigir a la página principal
-        exit();
     } else {
         echo "Usuario o contraseña incorrectos.";
     }
