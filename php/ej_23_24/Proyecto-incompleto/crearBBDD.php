@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Crear base de datos
-$sql = "CREATE DATABASE IF NOT EXISTS carrito_compras";
+$sql = "CREATE DATABASE IF NOT EXISTS bazar";
 if ($conn->query($sql) === TRUE) {
     echo "Base de datos creada exitosamente<br>";
 } else {
@@ -21,15 +21,16 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Seleccionar la base de datos
-$conn->select_db("carrito_compras");
+$conn->select_db("bazar");
 
 // Crear tabla de usuarios
 $sql = "CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) UNIQUE,
     contrasena VARCHAR(255) NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    administrador VARCHAR(2) 
 )";
 if ($conn->query($sql) === TRUE) {
     echo "Tabla 'usuarios' creada exitosamente<br>";
@@ -65,6 +66,9 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error al crear la tabla 'pedidos': " . $conn->error . "<br>";
 }
+
+//creo un usuario administrador
+$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena) VALUES ('alu', 'a@administrador.io', '123', 'SI')");
 
 // Cerrar conexión
 $conn->close();

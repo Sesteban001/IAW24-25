@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bazar Online</title>
+    <link rel="stylesheet" href="stilos.css"> <!-- Enlaza a un archivo CSS para estilos -->
+</head>
+<body>
+    <header>
+        <h1>Bienvenido a Nuestro Bazar</h1>
+    </header>
+    <?php session_start(); include('conexionbbdd.php') ?>
+    <form method="POST" action="login.php"> 
+        <table>
+            <tr>
+                <td>
+                    <label for="nombre">Usuario:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="contrasena">Contrasenia:</label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Log in">
+                </td>
+            </tr>
+        </table>
+    </form>
+<!-- hago el php apra si hay un usuario logueado ya que no se muestre el botol de registro -->
+    <?php if (empty($_SESSION[$usuario] || $_SESSION[$contrasena]  == FALSE)){?>
+    <form action="registro.php" method="GET">
+            <input type="submit" value="Log up">
+    </form>
+   <?php } ?>
+    <main>
+
+        <h2>Productos</h2>
+        
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Bazar Online. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
