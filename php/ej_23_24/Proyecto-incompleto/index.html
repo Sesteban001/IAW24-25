@@ -1,3 +1,4 @@
+<?php include('conexionbbdd.php') ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,42 +11,43 @@
     <header>
         <h1>Bienvenido a Nuestro Bazar</h1>
     </header>
-    <?php session_start(); include('conexionbbdd.php') ?>
+    
     <form method="POST" action="login.php"> 
-        <table>
-            <tr>
-                <td>
-                    <label for="nombre">Usuario:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="contrasena">Contrasenia:</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Log in">
-                </td>
-            </tr>
-        </table>
+    <input type="submit" value="Log in">
     </form>
 <!-- hago el php apra si hay un usuario logueado ya que no se muestre el botol de registro -->
     <?php if (empty($_SESSION[$usuario] || $_SESSION[$contrasena]  == FALSE)){?>
     <form action="registro.php" method="GET">
             <input type="submit" value="Log up">
     </form>
-   <?php } ?>
+   <?php }; $result = $conn->query($sql);  $row_count = $result->num_rows; ?>
     <main>
-
+    <!-- recorrer los productos de la base de datos-->
+    <?php while($row = $result->fetch_assoc()) { ?>
         <h2>Productos</h2>
-        
+        <table border='1'>
+            <tr>
+                <th>ID</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Descripcion</th>
+            </tr>
+            <tr>
+            <?php
+                echo "<td>".$row['ID']."</td>";
+                echo "<td>".$row['img']."</td>";  
+                echo "<td>".$row['nombre']."</td>";
+                echo "<td>".$row['precio']."</td>";
+                echo "<td>".$row['Descripcion']."</td>";
+            ?>
+            </tr>
+        </table>
     </main>
-    
+    <?php };  $conn->close(); ?>
     <footer>
         <p>&copy; 2024 Bazar Online. Todos los derechos reservados.</p>
+        <p2>santiago esteban medina</p2>
     </footer>
 </body>
 </html>

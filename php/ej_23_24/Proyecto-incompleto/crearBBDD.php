@@ -29,8 +29,8 @@ $sql = "CREATE TABLE IF NOT EXISTS usuarios (
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE,
     contrasena VARCHAR(255) NOT NULL,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    administrador VARCHAR(2) 
+    fecha_registro DATE DEFAULT CURRENT_DATE,
+    administrador TINYINT DEFAULT 0 CHECK (administrador IN (0, 1))
 )";
 if ($conn->query($sql) === TRUE) {
     echo "Tabla 'usuarios' creada exitosamente<br>";
@@ -57,7 +57,7 @@ $sql = "CREATE TABLE IF NOT EXISTS pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
     producto_id INT NOT NULL, 
-    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha DATE DEFAULT CURRENT_DATE,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
     FOREIGN KEY (producto_id) REFERENCES productos(id)
 )";
@@ -67,9 +67,22 @@ if ($conn->query($sql) === TRUE) {
     echo "Error al crear la tabla 'pedidos': " . $conn->error . "<br>";
 }
 
-//creo un usuario administrador
-$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena) VALUES ('alu', 'a@administrador.io', '123', 'SI')");
+//creo un usuario administrador y lo insetro 
+$nombre = 'santiago';
+$email = 'admin@santiago.com';
+$contrasena = password_hash('123', PASSWORD_DEFAULT); // Hash de la contraseña
+$administrador = 1; // Valor para indicar que es administrador
+$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena, administrador) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("sssi", $nombre, $email, $contrasena, $administrador);
 
+
+if ($stmt->execute()) {
+    echo "Usuario administrador creado exitosamente.";
+} else {
+    echo "Error al crear el usuario: " . $stmt->error;
+}
+//cerrar declaracion
+$stmt->close();
 // Cerrar conexión
 $conn->close();
 ?>

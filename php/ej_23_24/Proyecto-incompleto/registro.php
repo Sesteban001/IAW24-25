@@ -1,28 +1,15 @@
-<?php 
-session_start();
-include('conexionbbdd.php');
-
-// Preparar y vincular
-$stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena, fecha_registro) VALUES (?, ?, NOW())");
-$stmt->bind_param($nombre_usuario, $email ,$contrasena);
-
-// Ejecutar la consulta
-if ($stmt->execute()) {
-    echo "Registro exitoso.";
-} else {
-    echo "Error: " . $stmt->error;
-}
- // Cerrar la declaración
-$stmt->close();
-
-$conn->close();
-?>
-
+<?php include('conexionbbdd.php'); ?>
 <html>
 <body>
     <h2>Registro</h2>
-    <form method="POST"> 
+    <form method="post"> 
         <table>
+        <tr>
+                <td>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <label for="nombre">Usuario:</label>
@@ -37,17 +24,34 @@ $conn->close();
             </tr>
             <tr>
                 <td>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <input type="submit" value="Registrarse">
                 </td>
             </tr>
         </table>
     </form>
-    <?php  header("Location: index.html"); ?>
+    <?php 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $nombre = $_POST['nombre'];
+                $email = $_POST['email'];
+                $contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT); // Hash de la contraseña
+                $administrador = 0; // Valor para indicar que no es  administrador
+                // Preparar y vincular
+    
+                    $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena, administrador) VALUES (?, ?, ?, ? )");
+                    $stmt->bind_param("sssi", $nombre, $email ,$contrasena, $administrador);
+
+            // Ejecutar la consulta
+            if ($stmt->execute()) {
+                echo "Registro exitoso.";
+                header("Location: index.html");
+                exit();
+            } else {
+                echo "Error: " . $stmt->error;
+            }
+            // Cerrar la declaración
+            $stmt->close();
+        }
+        $conn->close();
+    ?>
 </body>
 </html>
