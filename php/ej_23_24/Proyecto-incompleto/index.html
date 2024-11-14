@@ -27,7 +27,7 @@
     <h2>Productos</h2>
         <table border='1'>
             <tr>
-                <th>ID</th>
+                <!-- <th>ID</th>  -->
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Precio</th>
@@ -35,14 +35,19 @@
             </tr>
     <!-- recorrer los productos de la base de datos-->
     <?php
-        while($row = $result->fetch_assoc()) { 
-            echo "<tr>";
-                    echo "<td>".$row['ID']."</td>";
-                    echo "<td>".$row['img']."</td>";  
-                    echo "<td>".$row['nombre']."</td>";
-                    echo "<td>".$row['precio']."</td>";
-                    echo "<td>".$row['Descripcion']."</td>";
-            echo "</tr>";
+     $sql = "SELECT img, nombre, precio, Descripcion FROM productos"; // Asegúrate de que estos campos existan en tu tabla
+     if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) { 
+                echo "<tr>";
+                        //echo "<td>".$row['ID']."</td>";
+                        echo "<td>".$row['img']."</td>";  
+                        echo "<td>".$row['nombre']."</td>";
+                        echo "<td>".$row['precio']."</td>";
+                        echo "<td>".$row['Descripcion']."</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='4'>No se encontraron productos.</td></tr>";
         }
         $conn->close();
         ?>
@@ -50,7 +55,7 @@
     </main>
    
     <footer>
-        <p>&copy; 2024 Bazar Online. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Bazar Online. </p>
         <p2>santiago esteban medina</p2>
     </footer>
 </body>
