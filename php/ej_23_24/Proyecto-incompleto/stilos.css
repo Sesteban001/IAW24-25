@@ -38,3 +38,16 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+header {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos */
+    align-items: center; /* Centrar verticalmente */
+    padding: 10px;
+    background-color: #f8f8f8; /* Color de fondo del encabezado */
+}
+h1 {
+    margin: 0; /* Eliminar margen del h1 */
+}
+.usuario {
+    font-size: 1.2em; /* Tamaño de fuente para el nombre del usuario */
+}

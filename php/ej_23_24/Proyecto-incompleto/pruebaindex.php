@@ -1,6 +1,12 @@
 <?php 
 include('conexionbbdd.php'); 
-session_start(); // Asegúrate de iniciar la sesión
+//session_start(); // Asegúrate de iniciar la sesión
+if (!empty($_SESSION['nombre'])) {
+    $nombre_usuario = $_SESSION['nombre'];
+} else {
+   // $nombre_usuario = "Invitado"; // O cualquier otro valor predeterminado
+    echo "no esta registrado";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,26 +18,25 @@ session_start(); // Asegúrate de iniciar la sesión
 </head>
 <body>
     <header>
-        <h1>Bienvenido a Nuestro Bazar</h1>
+        <h1>Bienvenido a Nuestro Bazar <?php echo htmlspecialchars($nombre_usuario)."👌";?></h1>
     </header>
-    
+    <!-- Mostrar el botón de registro solo si no hay un usuario logueado -->
+    <?php
+    if (empty($_SESSION['nombre'])) { // Cambia 'usuario' por el nombre de la variable de sesión que uses
+    ?>
     <form method="POST" action="login.php"> 
         <input type="submit" value="Log in">
     </form>
-
-    <!-- Mostrar el botón de registro solo si no hay un usuario logueado -->
-    <?php
-    if (empty($_SESSION['usuario'])) { // Cambia 'usuario' por el nombre de la variable de sesión que uses
-    ?>
-        <form action="registro.php" method="GET">
-            <input type="submit" value="Log up">
-        </form>
+    <form action="registro.php" method="GET">
+        <input type="submit" value="Log up">
+    </form>
     <?php } ?>
 
     <main>
         <h2>Productos</h2>
         <table border='1'>
             <tr>
+                <!--<th>ID</th> -->
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Precio</th>
@@ -47,10 +52,12 @@ session_start(); // Asegúrate de iniciar la sesión
                 // Recorrer los productos de la base de datos
                 while($row = $result->fetch_assoc()) { 
                     echo "<tr>";
-                    echo "<td><img src='" . htmlspecialchars($row['img']) . "' alt='Imagen de " . htmlspecialchars($row['nombre']) . "' style='width:100px;'></td>"; // Muestra la imagen
-                    echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['precio']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['Descripcion']) . "</td>";
+                        //echo "<td>".$row['ID']."</td>";
+                        echo "<td><img src='" . htmlspecialchars($row['img']) . 
+                             "' alt='Imagen de " . htmlspecialchars($row['nombre']) . "' style='width:100px;'></td>"; // Muestra la imagen
+                        echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['precio']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['Descripcion']) . "</td>";
                     echo "</tr>";
                 }
             } else {

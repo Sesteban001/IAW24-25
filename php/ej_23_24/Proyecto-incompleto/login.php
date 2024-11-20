@@ -1,13 +1,15 @@
 <?php
-session_start(); // Iniciar la sesión
-
+//session_start(); // Iniciar la sesión
 // Incluir el archivo de conexión a la base de datos
 include('conexionbbdd.php'); // Asegúrate de que este archivo esté configurado correctamente
 
 // Verificar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $contrasena = $_POST['contrasena'];
+  
+    if (!empty($_POST['email']) && !empty($_POST['contrasena'])){
+        //$nombre = $_POST['nombre'];
+        $email = $_POST['email'];
+        $contrasena = $_POST['contrasena'];
 
     // Preparar la consulta para buscar el usuario por email
     $stmt = $conn->prepare("SELECT nombre, contrasena FROM usuarios WHERE email = ?");
@@ -16,31 +18,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     // Verificar si el usuario existe
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($nombre, $hashed_password);
-        $stmt->fetch();
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($nombre, $hashed_password);
+            $stmt->fetch();
 
-        // Verificar la contraseña
-        if (password_verify($contrasena, $hashed_password)) {
-            // Contraseña correcta, iniciar sesión
-            $_SESSION['nombre'] = $nombre; // Guardar el nombre en la sesión
-            echo "Inicio de sesión exitoso. Bienvenido, " . htmlspecialchars($nombre) . "!";
-            // Redirigir a la página principal o a otra página
-            header("Location: index.html");
-            exit();
+            // Verificar la contraseña
+            if (password_verify($contrasena, $hashed_password)) {
+                // Contraseña correcta, iniciar sesión
+                $_SESSION['nombre'] = $nombre; // Guardar el nombre en la sesión
+                // echo "Inicio de sesión exitoso. Bienvenido, " . htmlspecialchars($nombre) . "!";
+                // Redirigir a la página principal o a otra página
+                header("Location: pruebaindex.php");
+                exit; // Detener la ejecución del script
+            } else {
+                echo "Contraseña incorrecta.";
+            } 
         } else {
-            echo "Contraseña incorrecta.";
+            echo "No se encontró un usuario con ese email.";
         }
-    } else {
-        echo "No se encontró un usuario con ese email.";
-    }
-
     // Cerrar la declaración
     $stmt->close();
+    }else {
+        echo "Por favor, complete todos los campos.";
+    }
 }
-
 // Cerrar la conexión
-$conn->close();
+//$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
