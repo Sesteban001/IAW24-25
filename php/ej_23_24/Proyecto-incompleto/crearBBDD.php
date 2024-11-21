@@ -69,7 +69,7 @@ if ($conn->query($sql) === TRUE) {
 
 //creo un usuario administrador y lo insetro 
 $nombre = 'santiago';
-$email = 'admin@santiago.com';
+$email = 'admin@bazar.es';
 $contrasena = password_hash('123', PASSWORD_DEFAULT); // Hash de la contraseña
 $administrador = 1; // Valor para indicar que es administrador
 $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email, contrasena, administrador) VALUES (?, ?, ?, ?)");

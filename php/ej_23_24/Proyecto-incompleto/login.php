@@ -1,49 +1,52 @@
 <?php
 //session_start(); // Iniciar la sesión
-// Incluir el archivo de conexión a la base de datos
 include('conexionbbdd.php'); // Asegúrate de que este archivo esté configurado correctamente
 
 // Verificar si el formulario ha sido enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
-    if (!empty($_POST['email']) && !empty($_POST['contrasena'])){
-        //$nombre = $_POST['nombre'];
-        $email = $_POST['email'];
+    // Verificar que al menos uno de los campos esté lleno
+    if (!empty($_POST['nombre']) && !empty($_POST['contrasena'])) {
+        $nombre = $_POST['nombre'];
         $contrasena = $_POST['contrasena'];
 
-    // Preparar la consulta para buscar el usuario por email
-    $stmt = $conn->prepare("SELECT nombre, contrasena FROM usuarios WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $stmt->store_result();
+        // Preparar la consulta para buscar el usuario por nombre
+        $stmt = $conn->prepare("SELECT nombre, contrasena, administrador FROM usuarios WHERE nombre = ?");
+        $stmt->bind_param("s", $nombre);
+        $stmt->execute();
+        $stmt->store_result();
 
-    // Verificar si el usuario existe
+        // Verificar si el usuario existe
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($nombre, $hashed_password);
+            $stmt->bind_result($nombre_usuario, $hashed_password, $rol);
             $stmt->fetch();
 
             // Verificar la contraseña
             if (password_verify($contrasena, $hashed_password)) {
                 // Contraseña correcta, iniciar sesión
-                $_SESSION['nombre'] = $nombre; // Guardar el nombre en la sesión
-                // echo "Inicio de sesión exitoso. Bienvenido, " . htmlspecialchars($nombre) . "!";
-                // Redirigir a la página principal o a otra página
-                header("Location: pruebaindex.php");
+                $_SESSION['nombre'] = $nombre_usuario; // Guardar el nombre en la sesión
+                $_SESSION['administrador'] = $rol; // Guardar el rol en la sesión
+
+                // Redirigir según el rol
+                if ($rol == 1) {
+                    header("Location: administrador.php"); // Redirigir a la página de administrador
+                } else {
+                    header("Location: pruebaindex.php"); // Redirigir a la página principal
+                }
                 exit; // Detener la ejecución del script
             } else {
                 echo "Contraseña incorrecta.";
-            } 
+            }
         } else {
-            echo "No se encontró un usuario con ese email.";
+            echo "No se encontró un usuario con ese nombre.";
         }
-    // Cerrar la declaración
-    $stmt->close();
-    }else {
+        // Cerrar la declaración
+        $stmt->close();
+    } else {
         echo "Por favor, complete todos los campos.";
     }
 }
 // Cerrar la conexión
-//$conn->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,8 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <table>
             <tr>
                 <td>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
                 </td>
             </tr>
             <tr>

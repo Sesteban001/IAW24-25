@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea id="descripcion" name="descripcion" required></textarea>
                 
                 <label for="img">Imagen:</label>
-                <input type="text" id="img" name="img" required>
+                <input type="text" id="img" name="img">
 
                 <input type="submit" value="Añadir Producto">
             </form>
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ejecutar la consulta
         if ($stmt->execute()) {
             echo "Producto añadido exitosamente.";
+           
         } else {
             echo "Error al añadir el producto: " . $stmt->error;
         }
@@ -45,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Cerrar la declaración
         $stmt->close();
     }
-}
 // Cerrar la conexión
 $conn->close();
 ?>
