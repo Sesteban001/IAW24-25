@@ -20,15 +20,8 @@ if (!empty($_SESSION['nombre'])) {
 </head>
 <body>
     <header>
-        <h1>Bienvenido a Nuestro Bazar <?php echo htmlspecialchars($nombre_usuario)."  👌";?></h1>
+        <h1>Bienvenido a Nuestro Bazar <?php echo htmlspecialchars($nombre_usuario)."👌";?></h1>
     </header>
-    <?php if (isset($_SESSION['nombre'])){ ?>
-        <tbody>
-            <form action="logout.php" method="GET">
-                <input type="submit" value="Log up">
-            </form>
-        </tbody>
-    <?php } ?>
     <!-- Mostrar el botón de registro solo si no hay un usuario logueado -->
     <?php
     if (empty($_SESSION['nombre'])) { // Cambia 'usuario' por el nombre de la variable de sesión que uses
@@ -43,18 +36,17 @@ if (!empty($_SESSION['nombre'])) {
 
     <main>
         <h2>Productos</h2>
-        <table border='1' class="producrtos">
+        <table border='1'>
             <tr>
                 <!--<th>ID</th> -->
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Descripción</th>
-                <th>Añadir</th>
             </tr>
             <!-- Consulta para obtener los productos -->
             <?php
-            $sql = "SELECT img, nombre, precio, Descripcion  FROM productos"; // Asegúrate de que estos campos existan en tu tabla
+            $sql = "SELECT img, nombre, precio, Descripcion FROM productos"; // Asegúrate de que estos campos existan en tu tabla
             $result = $conn->query($sql);
 
             // Verificar si hay productos
@@ -65,44 +57,18 @@ if (!empty($_SESSION['nombre'])) {
                         //echo "<td>".$row['ID']."</td>";
                         echo "<td><img src='" . htmlspecialchars($row['img']) . 
                              "' alt='Imagen de " . htmlspecialchars($row['nombre']) . "' style='width:100px;'></td>"; // Muestra la imagen
-                        echo "<td>". htmlspecialchars($row['nombre']) . "</td>";
-                        echo "<td>". htmlspecialchars($row['precio']) . "</td>";
-                        echo "<td>". htmlspecialchars($row['Descripcion']) . "</td>";
-                        echo "<td><a href='#' onclick='sumar'". htmlspecialchars($row['id']) ."Anadir</td>";
-                    //pongo si es un usuario administrador que pueda borrar un campo
-
+                        echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['precio']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['Descripcion']) . "</td>";
+                        echo "<td>".$row['']."</td>";
                     echo "</tr>";
                 }
             } else {
                 echo "<tr><td colspan='4'>No se encontraron productos.</td></tr>";
             }
-
+                    
             // Cerrar la conexión
             $conn->close();
-            ?>
-        </table>
-        <table>
-            <h3>carrito</h3>
-                <th>Nombre</th>
-                <th>Precio</th>
-            </tr>
-            <?php
-                $sql = "SELECT usuario_id, precio FROM pedidos"; // Asegúrate de que estos campos existan en tu tabla
-                $result = $conn->query($sql);
-
-                // Verificar si hay productos
-                if ($result->num_rows > 0) {
-                    // Recorrer los productos de la base de datos
-                    while($row = $result->fetch_assoc()) { 
-                        echo "<tr>";
-                            //echo "<td>".$row['ID']."</td>";
-                            echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['precio']) . "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='4'>No hay productos.</td></tr>";
-                }
             ?>
         </table>
     </main>
@@ -113,14 +79,3 @@ if (!empty($_SESSION['nombre'])) {
     </footer>
 </body>
 </html>
-<?php 
-    function sumar(){
-        if (!isset($_SESSION['count'])){
-            $_SESSION['count'] = 1;
-        } else {
-            ++$_SESSION['count'];
-        }
-        echo $_SESSION['count'];
-    }
-
-?>
