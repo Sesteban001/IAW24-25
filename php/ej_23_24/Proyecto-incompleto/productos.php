@@ -3,13 +3,13 @@
 include('conexionbbdd.php'); // Incluir la conexión a la base de datos
 $administrador=$_SESSION['administrador'];
 // Verificar si el formulario ha sido enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // Obtener los datos del formulario
     if (isset($administrador) &&  $administrador == 1 ){
-        $nombre = $_POST['nombre'];
-        $precio = $_POST['precio'];
-        $descripcion = $_POST['descripcion'];
-        $img = $_POST['img'];
+        $nombre = $$_REQUEST['nombre'];
+        $precio = $_REQUEST['precio'];
+        $descripcion = $_REQUEST['descripcion'];
+        $img = $_REQUEST['img'];
 ?>
     <html>
         <body>
@@ -46,7 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Cerrar la declaración
         $stmt->close();
     }
-// Cerrar la conexión
+
+
+    // Cerrar la conexión
 $conn->close();
 ?>
 

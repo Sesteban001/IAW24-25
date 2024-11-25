@@ -69,13 +69,13 @@ if (isset($_GET['add'])) {
         <tbody>
             <form action="logout.php" method="POST">
                 <input type="submit" value="Log out">
-                <p><?php var_dump($rol); ?></p>
+           <!--     <p><?php //var_dump($rol); ?></p>-->
             </form>
-            <?php if ($rol == 1): ?>
+            <?php if ($rol == 1) { ?>
                 <form action="administrador.php" method="POST">
                     <input type="submit" value="Modo Administrador">
                 </form>
-            <?php endif; ?>
+            <?php } ?>
         </tbody>
     <?php endif; ?>
     <!-- Mostrar el botón de registro solo si no hay un usuario logueado -->
