@@ -129,6 +129,11 @@ if (isset($_GET['add'])) {
         <?php 
             if (!empty($_SESSION['carrito'])) {
                 echo "<h3>Contenido del Carrito:</h3>";
+                ?>
+                <form action="pedidos.php"> 
+                    <input type="submit" value="pedido">
+                </form>
+                <?php
                 echo "<ul>";
                 foreach ($_SESSION['carrito'] as $producto) {
                     echo "<li>" . htmlspecialchars($producto['nombre']) . " - " . htmlspecialchars($producto['precio']) . "€</li>";
