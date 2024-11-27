@@ -93,7 +93,6 @@ if (isset($_GET['add'])) {
         <h2>Productos</h2>
         <table border='1' class="productos">
             <tr>
-                <th>ID</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Precio</th>
@@ -110,7 +109,7 @@ if (isset($_GET['add'])) {
                 // Recorrer los productos de la base de datos
                 while($row = $result->fetch_assoc()) { 
                     echo "<tr>";
-                        echo "<td>".htmlspecialchars($row['id'])."</td>";
+                       // echo "<td>".htmlspecialchars($row['id'])."</td>";
                         echo "<td><img src='" . htmlspecialchars($row['img']) . 
                              "' alt='Imagen de " . htmlspecialchars($row['nombre']) . "' style='width:100px;'></td>"; // Muestra la imagen
                         echo "<td>". htmlspecialchars($row['nombre']) . "</td>";
@@ -118,7 +117,7 @@ if (isset($_GET['add'])) {
                         echo "<td>". htmlspecialchars($row['descripcion']) . "</td>";
                         echo "<td><a href='pruebaindex.php?add=" . htmlspecialchars($row['id']) . "'>Añadir</a></td>";
                     echo "</tr>";
-                    var_dump(htmlspecialchars($row['id']));
+                    //var_dump(htmlspecialchars($row['id']));
                 }
             } else {
                 echo "<tr><td colspan='5'>No se encontraron productos.</td></tr>";
@@ -132,7 +131,7 @@ if (isset($_GET['add'])) {
                 echo "<h3>Contenido del Carrito:</h3>";
                 echo "<ul>";
                 foreach ($_SESSION['carrito'] as $producto) {
-                    echo "<li>" . htmlspecialchars($producto['nombre']) . " - $" . htmlspecialchars($producto['precio']) . "</li>";
+                    echo "<li>" . htmlspecialchars($producto['nombre']) . " - " . htmlspecialchars($producto['precio']) . "€</li>";
                 }
                 echo "</ul>";
             } else {

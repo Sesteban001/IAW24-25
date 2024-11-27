@@ -26,12 +26,17 @@ if (!$result_pedidos) {
     <h1>Panel de Administración</h1>
 
     <h2>Productos</h2>
+    <form action="productos.php" method="POST">
+        <input type="submit" value="Añadir un producto">
+    </form>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Descripción</th>
+            <th>Borrar</th>
+
         </tr>
         <?php while ($row_producto = $result_productos->fetch_assoc()): ?>
         <tr>
@@ -39,8 +44,15 @@ if (!$result_pedidos) {
             <td><?php echo htmlspecialchars($row_producto['nombre']); ?></td>
             <td><?php echo htmlspecialchars($row_producto['precio']); ?></td>
             <td><?php echo htmlspecialchars($row_producto['descripcion']); ?></td>
+            <td>
+                <form action="administrador.php" method="POST">
+                    <input type="hidden" name="id_dp" value="<?php echo htmlspecialchars($row_producto['id']); ?>">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
         </tr>
         <?php endwhile; ?>
+
     </table>
 
     <h2>Pedidos</h2>
@@ -64,29 +76,27 @@ if (!$result_pedidos) {
     </table>
 
     <h2>Usuarios Registrados</h2>
+        <form action="registro.php" method="POST">
+            <input type="submit" value="Añadir un usuario">
+        </form>
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Administrador</th>
             <th>Borrar</th>
-            <th>Añadir</th>
         </tr>
         <?php while ($row_usuario = $result_usuarios->fetch_assoc()): ?>
         <tr>
             <td><?php echo htmlspecialchars($row_usuario['id']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['nombre']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['email']); ?></td>
+            <td><?php echo htmlspecialchars($row_usuario['administrador']); ?></td>
             <td>
                 <form action="administrador.php" method="POST">
                     <input type="hidden" name="id_dpusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
                     <input type="submit" value="Borrar">
-                </form>
-            </td>
-            <td>
-            <form action="registro.php" method="POST">
-                    <input type="hidden" name="id_adusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
-                    <input type="submit" value="Añadir">
                 </form>
             </td>
         </tr>
@@ -99,14 +109,27 @@ if (!$result_pedidos) {
 </body>
 </html>
 <?php
-//usuarios para vorrar
-    if (!empty($_POST('id_dpusuario'))){
 
-        $sql = "DELETE FROM usuarios WHERE id = $id_usuario" ;
-        $conn->query($sql);
-
-        header("Location: administrador.php");
-
-    
+if (isset($_POST['id_dp'])) {
+    $producto = $_POST['id_dp'];
+    // Consulta para obtener el producto por ID
+    $sql = "DELETE FROM productos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $producto);
+    $stmt->execute();
+    $stmt->close();
 }
+
+
+//usuarios para vorrar
+    if (isset($_POST['id_dpusuario'])) {
+        $id_usuario = $_POST['id_dpusuario'];
+    
+        // Consulta para obtener el producto por ID
+        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $id_usuario);
+        $stmt->execute();
+        $stmt->close();
+    }
 ?>

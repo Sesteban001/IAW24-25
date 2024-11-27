@@ -32,8 +32,7 @@ $conn = new mysqli($servidor, $usuario, $contrasena, $bbdd);
 if ($conn->connect_error) {
     die("Conexión a la base de datos fallida: " . $conn->connect_error);
 }
-
-// Aquí puedes continuar con el resto de tu código para trabajar con la base de datos
+// Aquí puedes continuar con el resto de tu código para trabajar con la base de datos en los php siguientes
 
 // Cerrar la conexión
 //$conn->close();
