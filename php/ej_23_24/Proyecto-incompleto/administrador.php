@@ -69,12 +69,26 @@ if (!$result_pedidos) {
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Borrar</th>
+            <th>Añadir</th>
         </tr>
         <?php while ($row_usuario = $result_usuarios->fetch_assoc()): ?>
         <tr>
             <td><?php echo htmlspecialchars($row_usuario['id']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['nombre']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['email']); ?></td>
+            <td>
+                <form action="administrador.php" method="POST">
+                    <input type="hidden" name="id_dpusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
+            <td>
+            <form action="registro.php" method="POST">
+                    <input type="hidden" name="id_adusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
+                    <input type="submit" value="Añadir">
+                </form>
+            </td>
         </tr>
         <?php endwhile; ?>
     </table>
@@ -84,3 +98,15 @@ if (!$result_pedidos) {
     </form>
 </body>
 </html>
+<?php
+//usuarios para vorrar
+    if (!empty($_POST('id_dpusuario'))){
+
+        $sql = "DELETE FROM usuarios WHERE id = $id_usuario" ;
+        $conn->query($sql);
+
+        header("Location: administrador.php");
+
+    
+}
+?>

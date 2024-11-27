@@ -22,6 +22,14 @@
                     <input type="password" id="contrasena" name="contrasena" required>
                 </td>
             </tr>
+            <?php if (!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1 ): ?>
+                <tr>
+                    <td>
+                        <label for="administrador">Administrador:</label>
+                        <input type="number" id="administrador" name="administrador" required>
+                    </td>
+                </tr>
+            <?php endif; ?>
             <tr>
                 <td>
                     <input type="submit" value="Registrarse">
