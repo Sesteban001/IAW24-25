@@ -41,7 +41,7 @@ if ($conn->query($sql) === TRUE) {
 // Crear tabla de productos
 $sql = "CREATE TABLE IF NOT EXISTS productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    img VARCHAR (255) NOT NULL,
+    img VARCHAR (255),
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
     descripcion TEXT
@@ -83,6 +83,20 @@ if ($stmt->execute()) {
 }
 //cerrar declaracion
 $stmt->close();
+$sql = "INSERT INTO productos (nombre, descripcion, precio) VALUES 
+('Camiseta básica', 'Camiseta de algodón 100%, disponible en varios colores', 15.99),
+('Pantalones vaqueros', 'Pantalones vaqueros de corte ajustado, con bolsillos', 39.99),
+('Zapatos deportivos', 'Zapatos deportivos ligeros y cómodos para uso diario', 49.99),
+('Bolso de mano', 'Bolso de cuero sintético con varios compartimentos', 29.99),
+('Reloj de pulsera', 'Reloj de pulsera con correa de cuero y esfera analógica', 89.99),
+('Gafas de sol', 'Gafas de sol con protección UV y diseño moderno', 19.99),
+('Cartera de hombre', 'Cartera de cuero con múltiples ranuras para tarjetas', 24.99),
+('Vestido de verano', 'Vestido ligero de tela suave, ideal para el verano', 34.99),
+('Zapatillas de casa', 'Zapatillas de casa cómodas con suela antideslizante', 14.99),
+('Mochila escolar', 'Mochila espaciosa con varios compartimentos y diseño ergonómico', 49.99);
+";
+$conn -> query($sql);
+
 // Cerrar conexión
 $conn->close();
 ?>
