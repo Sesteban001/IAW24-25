@@ -14,6 +14,8 @@ $result_pedidos = $conn->query("SELECT p.id, u.nombre AS nombre_usuario, p.produ
 if (!$result_pedidos) {
     die("Error en la consulta de pedidos: " . $conn->error);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +80,7 @@ if (!$result_pedidos) {
             <td><?php echo htmlspecialchars($row_usuario['nombre']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['email']); ?></td>
             <td>
-                <form action="administrador.php" method="POST">
+                <form  method="POST">
                     <input type="hidden" name="id_dpusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
                     <input type="submit" value="Borrar">
                 </form>
@@ -101,12 +103,10 @@ if (!$result_pedidos) {
 <?php
 //usuarios para vorrar
     if (!empty($_POST('id_dpusuario'))){
-
+        $id_usuario = $_POST['id_dpusuario'];
         $sql = "DELETE FROM usuarios WHERE id = $id_usuario" ;
         $conn->query($sql);
 
         header("Location: administrador.php");
-
-    
 }
 ?>

@@ -60,7 +60,7 @@ if (!empty($_SESSION['nombre'])) {
                         echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['precio']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Descripcion']) . "</td>";
-                        echo "<td>".$row['']."</td>";
+                        //echo "<td>".$row['']."</td>";
                     echo "</tr>";
                 }
             } else {

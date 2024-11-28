@@ -69,7 +69,6 @@ if (isset($_GET['add'])) {
         <tbody>
             <form action="logout.php" method="POST">
                 <input type="submit" value="Log out">
-           <!--     <p><?php //var_dump($rol); ?></p>-->
             </form>
             <?php if ($rol == 1) { ?>
                 <form action="administrador.php" method="POST">
@@ -131,9 +130,9 @@ if (isset($_GET['add'])) {
             if (!empty($_SESSION['carrito'])) {
                 echo "<h3>Contenido del Carrito:</h3>";
                 echo "<ul>";
-                foreach ($_SESSION['carrito'] as $producto) {
-                    echo "<li>" . htmlspecialchars($producto['nombre']) . " - $" . htmlspecialchars($producto['precio']) . "</li>";
-                }
+                foreach ($_SESSION['carrito'] as $producto) {       
+                    echo "<li>" . htmlspecialchars($producto['nombre']) . " - " . htmlspecialchars($producto['precio']) . " €</li>";
+                }                        //cuenta de los productos repetidos ^|
                 echo "</ul>";
             } else {
                 echo "<p>El carrito está vacío.</p>";
