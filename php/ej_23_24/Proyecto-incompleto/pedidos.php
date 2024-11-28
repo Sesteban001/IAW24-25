@@ -5,11 +5,12 @@ $carrito = $_SESSION['carrito'] ?? [];
 
 // Verificar si se han enviado los productos desde el carrito y si esta logueado
 if (!empty($carrito)  && isset($_SESSION['nombre'])) {
-    $sql = "SELECT id FROM usuarios WHERE nombre = '". $_SESSION['nombre'] ."'";
-    $result = $conn ->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $usuario = $result->fetch_assoc()['id'];  // fetch the user ID
-    } 
+     // Obtener el ID del usuario
+     $sql = "SELECT id FROM usuarios WHERE nombre = '" . $_SESSION['nombre'] . "'";
+     $result = $conn->query($sql);
+     if ($result && $result->num_rows > 0) {
+         $usuario = $result->fetch_assoc()['id'];  // fetch the user ID
+     } 
 
     $total_dinero = 0;
     $producto_total = 0; 
