@@ -9,7 +9,7 @@ $result_productos = $conn->query("SELECT * FROM productos");
 $result_usuarios = $conn->query("SELECT * FROM usuarios");
 
 // Obtener pedidos
-$result_pedidos = $conn->query("SELECT p.id, u.nombre AS nombre_usuario, p.producto_id, p.fecha  FROM pedidos p JOIN usuarios u ON p.usuario_id = u.id");
+$result_pedidos = $conn->query("SELECT p.id, u.nombre AS nombre_usuario, p.productos_comprados, p.total_precio, p.fecha  FROM pedidos p JOIN usuarios u ON p.usuario = u.id");
 
 if (!$result_pedidos) {
     die("Error en la consulta de pedidos: " . $conn->error);
@@ -44,7 +44,7 @@ if (!$result_pedidos) {
         <tr>
             <td><?php echo htmlspecialchars($row_producto['id']); ?></td>
             <td><?php echo htmlspecialchars($row_producto['nombre']); ?></td>
-            <td><?php echo htmlspecialchars($row_producto['precio']); ?></td>
+            <td><?php echo htmlspecialchars($row_producto['precio']); ?> €</td>
             <td><?php echo htmlspecialchars($row_producto['descripcion']); ?></td>
             <td>
                 <form action="administrador.php" method="POST">
@@ -60,18 +60,18 @@ if (!$result_pedidos) {
     <h2>Pedidos</h2>
     <table border="1">
         <tr>
-            <th>ID</th>
+            <th>ID_pedido</th>
             <th>Usuario</th>
-            <th>ID Producto</th>
             <th>Cantidad</th>
+            <th>Precio</th>
             <th>Fecha</th>
         </tr>
         <?php while ($row_pedido = $result_pedidos->fetch_assoc()): ?>
         <tr>
             <td><?php echo htmlspecialchars($row_pedido['id']); ?></td>
             <td><?php echo htmlspecialchars($row_pedido['nombre_usuario']); ?></td>
-            <td><?php echo htmlspecialchars($row_pedido['producto_id']); ?></td>
-            <td><?php echo "";//htmlspecialchars($row_pedido['cantidad']); ?></td>
+            <td><?php echo htmlspecialchars($row_pedido['producto_comprados']); ?></td>
+            <td><?php echo htmlspecialchars($row_pedido['total_precio']); ?></td>
             <td><?php echo htmlspecialchars($row_pedido['fecha']); ?></td>
         </tr>
         <?php endwhile; ?>
@@ -105,7 +105,7 @@ if (!$result_pedidos) {
         <?php endwhile; ?>
     </table>
     <br>
-    <form action="pruebaindex.php" method="POST">
+    <form action="index.php" method="POST">
                 <input type="submit" value="Ir a Página Principal">
     </form>
 </body>

@@ -129,8 +129,8 @@ if (isset($_GET['add'])) {
             if (!empty($_SESSION['carrito'])) {
                 echo "<h3>Contenido del Carrito:</h3>";
                 ?>
-                <form action="pedidos.php"> 
-                    <input type="submit" value="pedido">
+                <form action="carro.php"> 
+                    <input type="submit" value="carro">
                 </form>
                 <?php
                 echo "<ul>";

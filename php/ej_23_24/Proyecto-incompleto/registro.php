@@ -51,7 +51,7 @@
             // Ejecutar la consulta
             if ($stmt->execute()) {
                 echo "Registro exitoso.";
-                header("Location: pruebaindex.php");
+                header("Location: index.php");
                 exit();
             } else {
                 echo "Error: " . $stmt->error;

@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($rol == 1) {
                     header("Location: administrador.php"); // Redirigir a la página de administrador
                 } else {
-                    header("Location: pruebaindex.php"); // Redirigir a la página principal
+                    header("Location: index.php"); // Redirigir a la página principal
                 }
                 exit; // Detener la ejecución del script
             } else {
