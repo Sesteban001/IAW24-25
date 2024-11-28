@@ -67,7 +67,24 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error al crear la tabla 'pedidos': " . $conn->error . "<br>";
 }
+/*
+//crear los detalles del pedido
+    $sql = "CREATE TABLE IF NOT EXISTS pedidos_detalle (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        pedido_id INT ,
+        producto_id INT ,
+        cantidad INT NOT NULL,
+        precio DECIMAL(10, 2) NOT NULL,
+        FOREIGN KEY (producto_id) REFERENCES productos(id),
+        FOREIGN KEY (pedido_id) REFERENCES pedidos(id)
 
+    )";
+    if ($conn->query($sql) === TRUE) {
+        echo "Tabla 'pedidos' creada exitosamente<br>";
+    } else {
+        echo "Error al crear la tabla 'pedidos': " . $conn->error . "<br>";
+    }
+*/
 //creo un usuario administrador y lo insetro 
 $nombre = 'santiago';
 $email = 'admin@bazar.es';

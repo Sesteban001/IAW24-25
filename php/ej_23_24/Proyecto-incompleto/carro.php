@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('conexionbbdd.php');
 
 // Verificar si se ha eliminado un producto del carrito
 if (isset($_GET['remove'])) {
@@ -42,7 +42,6 @@ foreach ($carrito as $producto) {
     <header>
         <h1>Resumen lista para Comprar</h1>
     </header>
-
     <main>
         <table border="1" class="carrito">
             <tr>
