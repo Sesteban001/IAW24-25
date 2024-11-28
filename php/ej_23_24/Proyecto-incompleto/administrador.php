@@ -14,6 +14,8 @@ $result_pedidos = $conn->query("SELECT p.id, u.nombre AS nombre_usuario, p.produ
 if (!$result_pedidos) {
     die("Error en la consulta de pedidos: " . $conn->error);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +96,7 @@ if (!$result_pedidos) {
             <td><?php echo htmlspecialchars($row_usuario['email']); ?></td>
             <td><?php echo htmlspecialchars($row_usuario['administrador']); ?></td>
             <td>
-                <form action="administrador.php" method="POST">
+                <form  method="POST">
                     <input type="hidden" name="id_dpusuario" value="<?php echo htmlspecialchars($row_usuario['id']); ?>">
                     <input type="submit" value="Borrar">
                 </form>
@@ -109,7 +111,6 @@ if (!$result_pedidos) {
 </body>
 </html>
 <?php
-
 if (isset($_POST['id_dp'])) {
     $producto = $_POST['id_dp'];
     // Consulta para obtener el producto por ID
