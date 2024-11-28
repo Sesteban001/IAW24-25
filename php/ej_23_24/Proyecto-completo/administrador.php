@@ -66,6 +66,7 @@ if (!$result_pedidos) {
             <th>Cantidad</th>
             <th>Precio</th>
             <th>Fecha</th>
+            <th>Borrar</th>
         </tr>
         <?php while ($row_pedido = $result_pedidos->fetch_assoc()): ?>
         <tr>
@@ -75,6 +76,12 @@ if (!$result_pedidos) {
             <td><?php echo htmlspecialchars($row_pedido['productos_comprados']); ?></td>
             <td><?php echo htmlspecialchars($row_pedido['total_precio']); ?>€</td>
             <td><?php echo htmlspecialchars($row_pedido['fecha']); ?></td>
+            <td>
+                <form action="administrador.php" method="POST">
+                    <input type="hidden" name="id_dpe" value="<?php echo htmlspecialchars($row_pedido['id']); ?>">
+                    <input type="submit" value="Borrar">
+                </form>
+            </td>
         </tr>
         <?php endwhile; ?>
     </table>
@@ -122,7 +129,16 @@ if (isset($_POST['id_dp'])) {
     $stmt->execute();
     $stmt->close();
 }
+if (isset($_POST['id_dpe'])) {
+    $pedido = $_POST['id_dpe'];
 
+    // Consulta para obtener el producto por ID
+    $sql = "DELETE FROM pedidos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $pedido);
+    $stmt->execute();
+    $stmt->close();
+}
 
 //usuarios para vorrar
     if (isset($_POST['id_dpusuario'])) {

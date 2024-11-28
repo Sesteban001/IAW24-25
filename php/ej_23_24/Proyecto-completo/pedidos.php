@@ -29,11 +29,12 @@ if (!empty($carrito)  && isset($_SESSION['nombre'])) {
             //consulta para sacar el id del pedido
                 $sql = "SELECT id FROM pedidos WHERE fecha = NOW() ORDER BY id DESC LIMIT 1"; // Get the last inserted order
                 $result = $conn->query($sql);
-                if ($result && $result->num_rows > 0) {
-                    $pedido_id = $result->fetch_assoc()['id']; // fetch the order ID
+                $row_count = $result->num_rows;
+                while($row = $result->fetch_assoc()) {
+                    $pedido_id = $row['id']; // en 'nombre' es el nombre de la columna de la BBDD
                 }
+                
             // Redirigir al usuario a una página de confirmación o de agradecimiento
-                header("Location: pedidos.php?pedido_id=" . $pedido_id);
             } else {
                 echo "Error al guardar el pedido: " . $stmt->error;
             }
@@ -54,9 +55,9 @@ if (!empty($carrito)  && isset($_SESSION['nombre'])) {
 </head>
 <body>
     <h1>Página de Pedidos</h1>
-    <?php if (isset($pedido_id)): ?>
+    <?php if (empty($pedido_id)): ?>
         <h2>Gracias por tu pedido!</h2>
-        <p>Tu número de pedido es: <?php echo $pedido_id; ?></p>
+        <p>Tu número de pedido es:  <!--<?php echo $pedido_id; ?></p> -->
     <?php else:  ?>
         <p>No se han enviado productos desde el carrito.</p>
     <?php endif; ?>
