@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcador de Baloncesto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+       
+        .container {
+            background-color: #fff;
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .team {
+            display: inline-block;
+            width: 40%;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+
+        .team h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+
+        .time {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+
+        .button {
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .button:disabled {
+            background-color: #ccc;
+        }
+
+
+        .time-buttons {
+            margin-top: 20px;
+        }
+
+
+        .time-button {
+            padding: 10px 20px;
+            font-size: 24px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        .time-button:disabled {
+            background-color: #ccc;
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="team">
+            <h2>Equipo A</h2>
+            <div id="score-a" class="score">0</div>
+            <div class="buttons">
+                <button class="button" id="1" onclick="valA(1)">+1</button>
+                <button class="button" id="2" onclick="valA(2)">+2</button>
+                <button class="button" id="3" onclick="valA(3)">+3</button>
+            </div>
+        </div>
+
+
+        <div class="team">
+            <h2>Equipo B</h2>
+            <div id="score-b" class="score">0</div>
+            <div class="buttons">
+                <button class="button" id="1" onclick="valB(1)">+1</button>
+                <button class="button" id="2" onclick="valB(2)">+2</button>
+                <button class="button" id="3" onclick="valB(3)">+3</button>
+            </div>
+        </div>
+
+
+        <div class="time">
+            <div id="time">00:00</div>
+        </div>
+
+
+        <div class="time-buttons">
+            <button class="time-button" id="start-btn">Iniciar</button>
+            <button class="time-button" id="pause-btn" disabled>Pausar</button>
+        </div>
+    </div>
+
+<script src="contador.js" defer></script>
+</body>
+</html>
