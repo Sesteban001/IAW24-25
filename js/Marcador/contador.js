@@ -1,6 +1,7 @@
 // Cogemos los div de los dos marcadores
 let loc = document.getElementById("score-a");
 let vis = document.getElementById("score-b");
+var time = document.getElementsByClassName("time-buttons")
 
 // Función para score A = locA
 function valA(puntos) {
@@ -15,3 +16,4 @@ function valB(puntos) {
     tempB += puntos; // Suma los puntos
     vis.innerText = tempB; // Actualiza el texto del elemento
 }
+
