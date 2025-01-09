@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Hello, world!</title>
+</head>
+
+
+<body>
+    <h1 class="text-center">Carrito de la compra</h1>
+    <div class="container">
+        <table class="table mx-auto">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Producto</th>
+                    <th class="text-center" scope="col">Nombre</th>
+                    <th class="text-center" scope="col">Cantidad</th>
+                    <th class="text-center" scope="col">Precio</th>
+                    <th class="text-center" scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Producto uno</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" value="72"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Producto dos</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" value="125"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Producto tres</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" value="250"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Producto cuatro</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="text-end"value="300"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5" class="text-end">Total = 0€</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
