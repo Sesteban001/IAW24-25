@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+    <style>
+        .mal{
+            color: red;
+        }
+        .bien{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registro de Usuarios</h2>
+    <ul>
+        <li class="mal">Nombre debe ser entre 2 y 5 caracteres</li>
+        <li class="mal">Contraseñas deben ser iguales</li>
+        <li class="mal">Contraseña al menos 5 caracteres</li>
+        <li class="mal">Campos email no debe estar vacio</li>
+    </ul>
+    <form action="procesar_registro.php" method="post" >
+        <div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div>
+            <label for="confirm_password">Confirmar Contraseña:</label>
+            <input type="password" id="confirm_password" name="confirm_password">
+        </div>
+        <div>
+            <input type="submit" id="boton" value="Registrarse"/>
+        </div>
+    </form>
+    <div id="mensage">
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
