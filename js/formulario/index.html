@@ -16,12 +16,12 @@
 <body>
     <h2>Registro de Usuarios</h2>
     <ul>
-        <li class="mal" id="Va1">Contraseñas deben ser iguales</li>
-        <li class="mal" id="Va2">Contraseña al menos 5 caracteres</li>
-        <li class="mal" id="Va3">Campos email no debe estar vacio</li>
-        <li class="mal" id="Va4">Nombre debe ser entre 2 y 5 caracteres</li>
+        <li class="mal">Nombre debe ser entre 2 y 5 caracteres</li>
+        <li class="mal">Contraseñas deben ser iguales</li>
+        <li class="mal">Contraseña al menos 5 caracteres</li>
+        <li class="mal">Campos email no debe estar vacio</li>
     </ul>
-    <form action="procesar_registro.php" method="post" id="formu">
+    <form action="procesar_registro.php" method="post">
         <div>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre">
@@ -39,12 +39,9 @@
             <input type="password" id="confirm_password" name="confirm_password">
         </div>
         <div>
-            <input type="submit" id="boton" value="Registrarse"/>
+            <input type="submit">Registrarse</button>
         </div>
     </form>
-    <div id="mensage">
-
-    </div>
     <script src="script.js"></script>
 </body>
 </html>
