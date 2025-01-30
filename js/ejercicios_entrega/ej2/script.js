@@ -25,7 +25,7 @@ nombre.addEventListener('input', function vnom(){
             msg='La longitud esta dentro de la longitud'
             if (/^[a-zA-Z]+$/.test(nombre)){
                 msg='El nombre tiene letras';
-                validateForm();;
+                validateForm();
             }else{
                 msg='tiene numeros no valido';
             }
@@ -38,7 +38,7 @@ nombre.addEventListener('input', function vnom(){
         msg='La longitud esta dentro de la longitud'
         if (/^[a-zA-Z]+$/.test(apellido)){
             msg='El nombre tiene letras';
-            validateForm();;
+            validateForm();
         }else{
             msg='tiene numeros no valido';
         }
@@ -51,7 +51,7 @@ contrasenas.addEventListener('input', function vcon(){
         msg='las contraseñas son iguales';
         if (con2.length >=3 && con2.length <=16){
             msg='La longitud esta dentro de la longitud';
-            validateForm();;
+            validateForm();
         }else{
             msg='tiene mas o menos de la longitud permitida';
         }
@@ -63,7 +63,7 @@ contrasenas.addEventListener('input', function vcon(){
 edad.addEventListener('input', function ved(){
     if (edad >= 16 && edad <= 30 ){
         msg='La edad es correcta';
-        validateForm();;
+        validateForm();
     }else{
         msg='tiene mas o menos de la edad permitida';
     }
