@@ -1,38 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const table = document.querySelector("table");
-    const totalElement = document.querySelector("tfoot th");
+// Get all the input fields for quantity
+const quantityInputs = document.querySelectorAll('td input[type="number"]:nth-child(2)');
 
-    table.addEventListener("click", (event) => {
-        if (event.target.classList.contains("btn-outline-dark")) {
-            const row = event.target.closest("tr");
-            const quantityInput = row.querySelector("input[type='number']");
-            const priceInput = row.querySelector("input[type='number']:nth-of-type(2)");
-            const subtotalElement = row.querySelector("td.text-end");
+// Get the total price element
+const totalPriceElement = document.querySelector('tfoot th[colspan="5"]');
 
-            let quantity = parseInt(quantityInput.value);
-            const price = parseFloat(priceInput.value);
+// Function to calculate the total price
+function calculateTotalPrice() {
+  let totalPrice = 0;
 
-            if (event.target.textContent === "+") {
-                quantity++;
-            } else if (event.target.textContent === "-" && quantity > 0) {
-                quantity--;
-            }
+  // Iterate through each product
+  quantityInputs.forEach((input, index) => {
+    const quantity = parseInt(input.value);
+    const price = parseInt(document.querySelectorAll('td input[type="number"]:nth-child(3)')[index].value);
+    const subtotal = quantity * price;
+    document.querySelectorAll('td:last-child')[index].textContent = `${subtotal} €`;
+    totalPrice += subtotal;
+  });
 
-            quantityInput.value = quantity;
-            const subtotal = quantity * price;
-            subtotalElement.textContent = `${subtotal.toFixed(2)} €`;
+  totalPriceElement.textContent = `Total = ${totalPrice} €`;
+}
 
-            updateTotal();
-        }
-    });
-
-    function updateTotal() {
-        let total = 0;
-        const subtotals = document.querySelectorAll("td.text-end");
-        subtotals.forEach(subtotalElement => {
-            const subtotal = parseFloat(subtotalElement.textContent);
-            total += subtotal;
-        });
-        totalElement.textContent = `Total = ${total.toFixed(2)}€`;
-    }
+// Add event listeners to the quantity input fields
+quantityInputs.forEach((input) => {
+  input.addEventListener('input', calculateTotalPrice);
 });
+
+// Initial calculation of the total price
+calculateTotalPrice();
