@@ -7,7 +7,7 @@ function pidecripto(){
         .then((response) => {
             var  coindata = response.data;
                 if (coindata){
-
+                    muestracripto(coindata);
                 }
         })
         .then((j) => muestracripto(j));
